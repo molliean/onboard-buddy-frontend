@@ -1,6 +1,6 @@
 // src/App.jsx
 
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar';

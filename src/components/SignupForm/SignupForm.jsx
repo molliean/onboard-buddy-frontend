@@ -1,13 +1,11 @@
 //src/components/SignupForm/SignupForm.jsx
 
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
-import { UserContext } from '../../Contexts/UserContext';
 
-const SignupForm = () => {
+const SignupForm = ({setUser}) => {
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
@@ -20,15 +18,17 @@ const SignupForm = () => {
     setMessage(msg);
   };
 
-  const handleChange = (e) => {                                                             `~~`
+  const handleChange = (e) => {                                                             
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newUserResponse = await authService.signup(formData);
-      setUser(newUserResponse.user);
+      console.log(formData)
+      const createdUser = await authService.signup(formData);
+      console.log(createdUser)
+      setUser(createdUser.user);
       navigate('/');
     } catch (err) {
       updateMessage(err.message);

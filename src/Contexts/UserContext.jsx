@@ -1,11 +1,10 @@
 // src/Contexts/UserContext.jsx
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext } from 'react';
 
 export const UserContext = createContext(null);
 
 export function UserProvider({ children, loggedUser }) {
-    // const [user, setUser] = useState('user');
     console.log('in UserProvider -->', loggedUser);
     return (
         <UserContext.Provider value={loggedUser}>

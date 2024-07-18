@@ -1,11 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
-import { UserContext, useLoggedUser } from '../../Contexts/UserContext';
 
-const SigninForm = () => {
+const SigninForm = ({setUser}) => {
   const navigate = useNavigate();
-  const { setUser } = useLoggedUser();
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
@@ -25,7 +23,7 @@ const SigninForm = () => {
     e.preventDefault();
     try {
       const user = await authService.signin(formData);
-      console.log(user);
+      console.log(user, '<-- logged in user');
       setUser(user);
       navigate('/');
     } catch (err) {
