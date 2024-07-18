@@ -1,10 +1,10 @@
 // src/components/Dashboard/Dashboard.jsx
 
-import { UserContext, useLoggedUser } from '../../Contexts/UserContext';
+import { UserContext } from '../../App';
 import { useContext } from 'react';
 
 const Dashboard = () => {
-  const loggedUser = useLoggedUser();
+  const loggedUser = useContext(UserContext)
   console.log(loggedUser, "<--logged in user")
   return (
     <main>

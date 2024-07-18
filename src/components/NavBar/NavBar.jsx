@@ -1,11 +1,13 @@
 // src/components/NavBar/NavBar.jsx
 
 import { Link } from 'react-router-dom';
+
+import { UserContext } from '../../App';
 import { useContext } from 'react';
-import { UserContext } from '../../Contexts/UserContext';
+
 
 const NavBar = ({ handleSignout }) => {
-  const {user} = useContext(UserContext);
+  const user = useContext(UserContext);
   return (
     <>
       {user ? (

@@ -1,6 +1,6 @@
 // src/App.jsx
 
-import { useState, useContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar';
@@ -10,7 +10,8 @@ import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 
 import * as authService from '../src/services/authService'; 
-import { UserProvider, UserContext } from './Contexts/UserContext';
+
+const UserContext = createContext(null);
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
@@ -22,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <UserProvider loggedUser={user}>
+      <UserContext.Provider value={user}>
         <NavBar handleSignout={handleSignout} />
         <Routes>
           <Route path="/" element={user ? <Dashboard user={user} /> : <Landing />} />
@@ -31,7 +32,7 @@ const App = () => {
           {user && <Route path="/dashboard" element={<Dashboard user={user} />} />}
           <Route path="*" element={<Navigate to={user ? "/dashboard" : "/"} />} />
         </Routes>
-      </UserProvider>
+      </UserContext.Provider>
     </>
   );
 };

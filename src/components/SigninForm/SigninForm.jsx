@@ -1,11 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
-import { UserContext, useLoggedUser } from '../../Contexts/UserContext';
 
-const SigninForm = () => {
+const SigninForm = ({setUser}) => {
   const navigate = useNavigate();
-  const { setUser } = useLoggedUser();
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
