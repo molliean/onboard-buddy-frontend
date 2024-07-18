@@ -1,10 +1,9 @@
 const Landing = () => {
   return (
     <main>
-      <h1>Hello, you are on the landing page for visitors.</h1>
+      <h1>Welcome to W&B.</h1>
       <h3>
-        If you sign up for a new account, you will have the ability to sign in
-        and see your super secret dashboard.
+        Sign up or sign in to start the onboarding process.
       </h3>
     </main>
   );

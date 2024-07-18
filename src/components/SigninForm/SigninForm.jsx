@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
+import { UserContext } from '../../Contexts/UserContext';
 
-const SigninForm = (props) => {
+const SigninForm = () => {
   const navigate = useNavigate();
-  const [message, setMessage] = useState(['']);
+  const { setUser } = useLoggedUser();
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -24,23 +26,28 @@ const SigninForm = (props) => {
     try {
       const user = await authService.signin(formData);
       console.log(user);
-      props.setUser(user);
+      setUser(user);
       navigate('/');
     } catch (err) {
       updateMessage(err.message);
     }
   };
 
+  const { username, password } = formData;
+
+  const isFormInvalid = () => {
+    return !(username && password);
+  };
+
   return (
     <main>
       <h1>Log In</h1>
       <p>{message}</p>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
-            autoComplete="off"
             id="username"
             value={formData.username}
             name="username"
@@ -51,7 +58,6 @@ const SigninForm = (props) => {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
-            autoComplete="off"
             id="password"
             value={formData.password}
             name="password"
@@ -59,7 +65,7 @@ const SigninForm = (props) => {
           />
         </div>
         <div>
-          <button>Log In</button>
+          <button disabled={isFormInvalid()}>Log In</button>
           <Link to="/">
             <button>Cancel</button>
           </Link>
