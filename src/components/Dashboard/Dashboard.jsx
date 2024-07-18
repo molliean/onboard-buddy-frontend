@@ -1,13 +1,14 @@
 // src/components/Dashboard/Dashboard.jsx
 
-import { UserContext } from '../../Contexts/UserContext';
+import { UserContext, useLoggedUser } from '../../Contexts/UserContext';
 import { useContext } from 'react';
 
-const Dashboard = ({}) => {
-  const {user} = useContext(UserContext);
+const Dashboard = () => {
+  const loggedUser = useLoggedUser();
+  console.log(loggedUser, "<--logged in user")
   return (
     <main>
-      <h1>Welcome, {user.username}</h1>
+      <h1>Welcome, {loggedUser.username}</h1>
       <p>
         This is the dashboard page where you, and only you, can see a dashboard
         of all of your things.

@@ -4,11 +4,11 @@ import { createContext, useContext, useState } from 'react';
 
 export const UserContext = createContext(null);
 
-export function UserProvider({ children }) {
-    const [user, setUser] = useState(null);
-    console.log('in UserProvider -->', user);
+export function UserProvider({ children, loggedUser }) {
+    // const [user, setUser] = useState('user');
+    console.log('in UserProvider -->', loggedUser);
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={loggedUser}>
             {children}
         </UserContext.Provider>
     )

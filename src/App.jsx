@@ -13,7 +13,7 @@ import * as authService from '../src/services/authService';
 import { UserProvider, UserContext } from './Contexts/UserContext';
 
 const App = () => {
-  const { user, setUser } = useContext(UserContext);
+  const [user, setUser] = useState(authService.getUser());
 
   const handleSignout = () => {
     authService.signout();
@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <>
-      <UserProvider>
+      <UserProvider loggedUser={user}>
         <NavBar handleSignout={handleSignout} />
         <Routes>
           <Route path="/" element={user ? <Dashboard user={user} /> : <Landing />} />
