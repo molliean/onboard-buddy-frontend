@@ -1,0 +1,22 @@
+/* src/components/Boards/BoardDetails */
+
+/* .boardDetails {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+} */
+
+.taskCard {
+    background-color: #939335;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
