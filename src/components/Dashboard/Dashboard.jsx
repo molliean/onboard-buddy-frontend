@@ -7,8 +7,8 @@ import { useLoggedUser } from '../../Contexts/UserContext';
 
 const Dashboard = ({boards}) => {
   const loggedUser = useLoggedUser();
-  console.log(loggedUser, "<--logged in user")
-  console.log(boards, '<-- boards in dashboard')
+  // console.log(loggedUser, "<--logged in user")
+  // console.log(boards, '<-- boards in dashboard')
 
   return (
     <main>
@@ -19,9 +19,9 @@ const Dashboard = ({boards}) => {
       </button>
       <ul>
         {boards.map((board) => {
-        console.log(board, '<-- individual board');
+        // console.log(board, '<-- individual board');
           return (<li key={board._id}>
-            Board: {board.boardName}
+             <Link to={`/boards/${board._id}`}>Board: {board.boardName}</Link>
           </li>)
 })}
       </ul>
