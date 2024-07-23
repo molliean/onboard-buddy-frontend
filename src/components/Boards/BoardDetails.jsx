@@ -36,22 +36,28 @@ export default function BoardDetails({ handleDeleteBoard }) {
                 <h2>{board.boardName}</h2>
                 <h3>Tasks:</h3>
                 <div>
-                {board.tasks.map((task) => {
-                    return (
-                        <div key={task._id} className={styles.taskCard}>
-                            <div className={styles.taskTitle}>{task.taskName}</div>
-                            <p>{task.description}</p>
-                        </div>
-                    );
-                })}
-            </div>
+                    {board.tasks.map((task) => {
+                        return (
+                            <div key={task._id} className={styles.taskCard}>
+                                <div className={styles.taskTitle}>{task.taskName}</div>
+                                <p>{task.description}</p>
+                                <p>Complete within: {task.completeWithin}</p>
+                                <p className={styles.category}>{task.category}</p>
+                                <p>{task.status}</p>
+                                <button><Link to={`/boards/${board._id}/tasks/${task._id}/edit`}>View/edit task</Link></button>
+                                {/* {loggedUser._id === board.owner && (
+                                    <button onClick={() => handleDeleteTask(boardId)}>Delete Task</button>
+                                )} */}
+                            </div>
+                        );
+                    })}
+                </div>
                 {/* <ul>
                     {board.tasks.map((task) => {
                         return <li key={task._id}>{task.taskName}</li>
                     })}
                 </ul> */}
-                <button> <Link to={`/boards/${boardId}/tasks/new`}> Add Tasks</Link></button>
-                <button>Edit Board</button>
+                <button> <Link to={`/boards/${boardId}/tasks/new`}>Add Task to Board</Link></button>
                 {loggedUser._id === board.owner && (
                     <button onClick={() => handleDeleteBoard(boardId)}>Delete Board</button>
                 )}

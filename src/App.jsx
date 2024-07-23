@@ -81,6 +81,50 @@ const App = () => {
     }
   }
 
+  async function handleDeleteTask(boardId, taskId) {
+    try {
+      await boardService.deleteTask(boardId, taskId);
+      const updatedBoards = boards.map((board) => {
+        if (board._id === boardId) {
+          return {
+            ...board,
+            tasks: board.tasks.filter((task) => task._id !== taskId),
+          };
+        } else {
+          return board;
+        }
+      });
+      setBoards(updatedBoards);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleUpdateTask(boardId, taskId, taskFormData) {
+    try {
+      const updatedTask = await boardService.updateTask(boardId, taskId, taskFormData);
+      const updatedBoards = boards.map((board) => {
+        if (board._id === boardId) {
+          return {
+            ...board,
+            tasks: board.tasks.map((task) => {
+              if (task._id === taskId) {
+                return updatedTask;
+              } else {
+                return task;
+              }
+            }),
+          };
+        } else {
+          return board;
+        }
+      });
+      setBoards(updatedBoards);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <UserProvider loggedUser={user}>
@@ -90,8 +134,9 @@ const App = () => {
             <>
               <Route path="/" element={<Dashboard user={user} boards={boards} />} />
               <Route path='/boards/new' element={<BoardForm handleAddBoard={handleAddBoard}/>} />
-              <Route path='/boards/:boardId' element={<BoardDetails handleDeleteBoard={handleDeleteBoard}/>}/>
+              <Route path='/boards/:boardId' element={<BoardDetails handleDeleteBoard={handleDeleteBoard} handleDeleteTask={handleDeleteTask}/>}/>
               <Route path="/boards/:boardId/tasks/new" element={<TaskForm handleAddTask={handleAddTask}/>} /> 
+              <Route path="/boards/:boardId/tasks/:taskId/edit" element={<TaskForm handleUpdateTask={handleUpdateTask}/>}/>
             </>
           ) : (
             <Route path="/" element={<Landing />} />

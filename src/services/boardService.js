@@ -98,17 +98,42 @@ async function deleteBoard(boardId) {
     } catch (error) {
         console.log(error)
     }
+}
 
+// delete task function
+async function deleteTask(boardId, taskId) {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${boardId}/tasks/${taskId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        return res.json();
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-
-    // const response = await fetch(`${BACKEND_URL}/${boardId}`, {
-    //     method: 'DELETE'
-    // })
-    // const data = await response.json()
-    // if (response.ok) return data
-    // throw new Error(data.error)
+// show task details function
+async function showTask(boardId, taskId) {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${boardId}/tasks/${taskId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
-
-export { index, create, show, updateBoard, deleteBoard, taskIndex, createTask }
+export { 
+    index, 
+    create, 
+    show, 
+    updateBoard, 
+    deleteBoard, 
+    taskIndex, 
+    createTask, 
+    deleteTask,
+    showTask,
+}

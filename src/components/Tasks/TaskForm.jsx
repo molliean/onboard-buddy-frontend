@@ -1,7 +1,8 @@
 // src/components/Tasks/TaskForm.jsx
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import * as boardService from '../../services/boardService';
 
 const initialState = {
     taskName: '',
@@ -12,26 +13,47 @@ const initialState = {
     // feedback: '',
 }
 
-export default function TaskForm({ handleAddTask }) {
+export default function TaskForm({ handleAddTask, handleUpdateTask }) {
     const {boardId} = useParams();
+    const {taskId} = useParams();
     const [formData, setFormData] = useState(initialState);
     const navigate = useNavigate();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    useEffect(() => {
+        if (taskId) {
+            async function fetchTask() {
+                try {
+                    const taskData = await boardService.showTask(boardId, taskId)
+                    // console.log(taskData, ' <-- task data from express')
+                    setFormData(taskData.task)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            fetchTask();
+        }
+    }, [boardId, taskId])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(formData, '<-- form data');
         // console.log({ ...formData, boardId }, '<-- form data before submit'); // Log the form data
         // console.log(boardId, '<-- board id');
-        handleAddTask(boardId, { ...formData, boardId });
+
+        if (taskId) {
+            handleUpdateTask(boardId, taskId, { ...formData, boardId });
+        } else {
+            handleAddTask(boardId, { ...formData, boardId });
+        }
         navigate(`/boards/${boardId}`);
     }
 
     return (
         <>
-            <h1>Enter New Task</h1>
+            <h1>{taskId ? 'Edit' : 'Create New'} Task</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="taskName">Task:</label>
@@ -101,7 +123,8 @@ export default function TaskForm({ handleAddTask }) {
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
-                <button type="submit">Add Task to Board</button>
+                <button type="submit">{taskId ? 'Update' : 'Add'} Task</button>
+                <button >Delete Task</button>
             </form>
         </>
 
