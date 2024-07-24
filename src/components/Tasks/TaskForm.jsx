@@ -13,7 +13,7 @@ const initialState = {
     // feedback: '',
 }
 
-export default function TaskForm({ handleAddTask, handleUpdateTask }) {
+export default function TaskForm({ handleAddTask, handleUpdateTask, handleDeleteTask }) {
     const {boardId} = useParams();
     const {taskId} = useParams();
     const [formData, setFormData] = useState(initialState);
@@ -124,7 +124,7 @@ export default function TaskForm({ handleAddTask, handleUpdateTask }) {
                     </select>
                 </div>
                 <button type="submit">{taskId ? 'Update' : 'Add'} Task</button>
-                <button >Delete Task</button>
+                <button onClick={() => handleDeleteTask(boardId, taskId)}>Delete Task</button>
             </form>
         </>
 

@@ -3,6 +3,7 @@
 
 import { Link } from 'react-router-dom'
 import { useLoggedUser } from '../../Contexts/UserContext';
+import styles from './Dashboard.module.css'
 
 
 const Dashboard = ({boards}) => {

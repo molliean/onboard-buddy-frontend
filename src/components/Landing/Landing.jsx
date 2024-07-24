@@ -1,9 +1,9 @@
 const Landing = () => {
   return (
     <main>
-      <h1>Welcome to W&B.</h1>
+      <h1>Welcome to W&B's <br />Onboarding Portal</h1>
       <h3>
-        Sign up or sign in to start the onboarding process.
+        Sign up or sign in to get started.
       </h3>
     </main>
   );

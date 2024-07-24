@@ -17,6 +17,8 @@ import * as boardService from '../src/services/boardService'
 import { UserProvider, UserContext } from './Contexts/UserContext';
 import BoardForm from './components/Boards/BoardForm';
 
+// import styles from './App.module.css'
+
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [boards, setBoards] = useState([]);
@@ -53,7 +55,7 @@ const App = () => {
   }
 
   async function handleAddTask(boardId, taskFormData) {
-    console.log({ boardId, taskFormData }, '<-- task form data before API call'); // Add log here
+    console.log({ boardId, taskFormData }, '<-- task form data before API call');
     const newTask = await boardService.createTask(boardId, taskFormData);
     const updatedBoards = boards.map((board) => {
       if (board._id === taskFormData.boardId) {
@@ -125,8 +127,9 @@ const App = () => {
     }
   }
 
+
   return (
-    <>
+    <div >
       <UserProvider loggedUser={user}>
         <NavBar handleSignout={handleSignout} />
         <Routes>
@@ -134,9 +137,9 @@ const App = () => {
             <>
               <Route path="/" element={<Dashboard user={user} boards={boards} />} />
               <Route path='/boards/new' element={<BoardForm handleAddBoard={handleAddBoard}/>} />
-              <Route path='/boards/:boardId' element={<BoardDetails handleDeleteBoard={handleDeleteBoard} handleDeleteTask={handleDeleteTask}/>}/>
+              <Route path='/boards/:boardId' element={<BoardDetails handleDeleteBoard={handleDeleteBoard} />}/>
               <Route path="/boards/:boardId/tasks/new" element={<TaskForm handleAddTask={handleAddTask}/>} /> 
-              <Route path="/boards/:boardId/tasks/:taskId/edit" element={<TaskForm handleUpdateTask={handleUpdateTask}/>}/>
+              <Route path="/boards/:boardId/tasks/:taskId/edit" element={<TaskForm handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask}/>}/>
             </>
           ) : (
             <Route path="/" element={<Landing />} />
@@ -148,7 +151,7 @@ const App = () => {
 
         </Routes>
       </UserProvider>
-    </>
+    </div>
   );
 };
 
