@@ -2,11 +2,12 @@
 
 import { Link } from 'react-router-dom';
 import { useLoggedUser } from '../../Contexts/UserContext';
+import styles from './NavBar.module.css';
 
 const NavBar = ({ handleSignout }) => {
   const loggedUser = useLoggedUser();
   return (
-    <>
+    <div className={styles.navContainer}>
       {loggedUser ? (
         <nav>
           <ul>
@@ -32,7 +33,7 @@ const NavBar = ({ handleSignout }) => {
           </ul>
         </nav>
       )}
-    </>
+    </div>
   );
 };
 export default NavBar;

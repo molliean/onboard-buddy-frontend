@@ -9,10 +9,10 @@
 html,
 body {
   margin: 0;
+  /* margin-left: 30px; */
   height: 100%;
-  overflow: hidden;
   background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fecb33' fill-opacity='0.63'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");  
+  /* background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fecb33' fill-opacity='0.63'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");   */
 
   --primary: #1A1C1F;
   --background: #ffffff;
@@ -21,6 +21,11 @@ body {
   --btn-background: #FECB33;
   --font-body: 'Open Sans', sans-serif;
   --font-display: 'Bungee', cursive;
+  --nav-font: 'Bungee Hairline', cursive;
+}
+
+main {
+  margin-left: 40px;
 }
 
 form {
@@ -39,4 +44,56 @@ form {
 form label {
   margin-bottom: 5px;
   font-family: var(--font-body);
+}
+
+h1 {
+  font-family: 'Bungee', serif;
+  color: black;
+}
+
+h2 {
+  font-family: 'Bungee Hairline', cursive;
+  color: black;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
+
+.board-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.board-tile-card{
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  text-decoration: none;
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--card-background);
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-btn {
+  background-color: var(--btn-background);
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  text-decoration: none;
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

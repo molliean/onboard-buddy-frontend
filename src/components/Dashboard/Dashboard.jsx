@@ -15,14 +15,14 @@ const Dashboard = ({boards}) => {
     <main>
       <h1>Welcome, {loggedUser.username}</h1>
       <h2>Your Task Boards</h2>
-      <button>
+      <button className='create-btn'>
         <Link to="/boards/new">Create new board</Link>
       </button>
-      <ul>
+      <ul className='board-list'>
         {boards.map((board) => {
         // console.log(board, '<-- individual board');
-          return (<li key={board._id}>
-             <Link to={`/boards/${board._id}`}>Board: {board.boardName}</Link>
+          return (<li key={board._id} className='board-tile-card'>
+             <Link to={`/boards/${board._id}`}>{board.boardName}</Link>
           </li>)
 })}
       </ul>

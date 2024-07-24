@@ -57,7 +57,7 @@ export default function BoardDetails({ handleDeleteBoard }) {
                         return <li key={task._id}>{task.taskName}</li>
                     })}
                 </ul> */}
-                <button> <Link to={`/boards/${boardId}/tasks/new`}>Add Task to Board</Link></button>
+                <button className="create-btn"> <Link to={`/boards/${boardId}/tasks/new`}>Add Task to Board</Link></button>
                 {loggedUser._id === board.owner && (
                     <button onClick={() => handleDeleteBoard(boardId)}>Delete Board</button>
                 )}

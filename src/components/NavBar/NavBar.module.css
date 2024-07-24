@@ -1,0 +1,16 @@
+
+.navContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--btn-background);
+    border-bottom: 1px solid #ccc;
+}
+
+.navContainer li {
+    list-style: none;
+    margin: 0 0.5rem;
+    font-family: var(--nav-font);
+    background-color: var(--btn-background);
+}
