@@ -27,8 +27,8 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
             async function fetchTask() {
                 try {
                     const taskData = await boardService.showTask(boardId, taskId)
-                    // console.log(taskData, ' <-- task data from express')
-                    setFormData(taskData.task)
+                    console.log(taskData, ' <-- task data from express')
+                    setFormData(taskData)
                 } catch (error) {
                     console.log(error)
                 }

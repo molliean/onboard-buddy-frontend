@@ -23,7 +23,7 @@ export default function BoardDetails({ handleDeleteBoard }) {
             }
         }
         fetchBoard();
-    }, [boardId, board])
+    }, [])
 
     // console.log(board, ' <-- board state')
 
@@ -35,7 +35,7 @@ export default function BoardDetails({ handleDeleteBoard }) {
         <main>
             <div>
                 <h1>{board.boardName}</h1>
-                <h3>Tasks:</h3>
+                <h3>Your To-Do List:</h3>
                 <div className='task-list'>
                     {board.tasks.map((task) => {
                         return (

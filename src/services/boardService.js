@@ -65,8 +65,13 @@ async function create(boardFormData) {
 async function show(boardId) {
     try {
         const res = await fetch(`${BACKEND_URL}/${boardId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'cache-control': 'no-cache'
+        },
+
         });
+
         // console.log(res.json())
         return res.json();
     } catch (error) {
@@ -76,16 +81,37 @@ async function show(boardId) {
 
 // update board function
 async function updateBoard(boardId, formData) {
-    const res = await fetch(`${BACKEND_URL}/${boardId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    const data = await res.json();
-    if (res.ok) return data
-    throw new Error(data.error)
+    try {
+        const res = await fetch(`${BACKEND_URL}/${boardId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+              },
+            body: JSON.stringify(formData)
+        })
+        const data = await res.json();
+        if (res.ok) return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// update task function
+async function updateTask(boardId, taskId, taskFormData) {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${boardId}/tasks/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+              },
+            body: JSON.stringify(taskFormData)
+        })
+        return res.json();
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 // delete board function
@@ -124,7 +150,9 @@ async function showTask(boardId, taskId) {
     } catch (error) {
         console.log(error);
     }
-}
+} 
+
+
 
 
 export { 
@@ -137,4 +165,5 @@ export {
     createTask, 
     deleteTask,
     showTask,
+    updateTask,
 }
