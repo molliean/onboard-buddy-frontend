@@ -17,7 +17,6 @@ import * as boardService from '../src/services/boardService'
 import { UserProvider, UserContext } from './Contexts/UserContext';
 import BoardForm from './components/Boards/BoardForm';
 
-// import styles from './App.module.css'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
@@ -36,8 +35,10 @@ const App = () => {
     async function fetchBoards() {
       try {
         const data = await boardService.index()
-        // console.log(data, " <-- data from express")
-        setBoards(data.boards)
+        console.log(data, " <-- data from express")
+        const userBoards = data.filter((board)=>board?.owner?._id===user._id)
+        console.log(userBoards)
+        setBoards(userBoards)
         setError('')
       } catch (error) {
         console.log(error)
@@ -49,7 +50,8 @@ const App = () => {
 
   async function handleAddBoard(boardFormData) {
     const newBoard = await boardService.create(boardFormData);
-    setBoards([newBoard, ...boards])
+    console.log(newBoard, '<-- new board details')
+    setBoards([...boards, newBoard])
     console.log(boardFormData, '<-- board form data')
     navigate('/')
   }
@@ -57,8 +59,10 @@ const App = () => {
   async function handleAddTask(boardId, taskFormData) {
     console.log({ boardId, taskFormData }, '<-- task form data before API call');
     const newTask = await boardService.createTask(boardId, taskFormData);
+    console.log(newTask)
     const updatedBoards = boards.map((board) => {
       if (board._id === taskFormData.boardId) {
+        console.log(board)
         return {
           ...board,
           tasks: [...board.tasks, newTask],
@@ -106,6 +110,7 @@ const App = () => {
     try {
       const updatedTask = await boardService.updateTask(boardId, taskId, taskFormData);
       const updatedBoards = boards.map((board) => {
+        console.log(board)
         if (board._id === boardId) {
           return {
             ...board,
@@ -131,7 +136,7 @@ const App = () => {
   return (
     <div >
       <UserProvider loggedUser={user}>
-        <NavBar handleSignout={handleSignout} />
+        <NavBar handleSignout={handleSignout} boards={boards}/>
         <Routes>
           {user ? (
             <>

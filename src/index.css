@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Bungee+Outline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Bungee+Outline&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -19,13 +18,13 @@ body {
   --card-background: #ffffff;
   --card-border: #57D3DB;
   --btn-background: #FECB33;
-  --font-body: 'Open Sans', sans-serif;
   --font-display: 'Bungee', cursive;
-  --nav-font: 'Bungee Hairline', cursive;
+  --font-body: 'Roboto Mono', monospace;
 }
 
 main {
-  margin-left: 40px;
+  margin-left: 220px;
+  padding: 20px
 }
 
 form {
@@ -38,26 +37,62 @@ form {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  -webkit-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+  -moz-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+  box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+}
+
+form .form-group {
+  display: flex;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 form label {
   margin-bottom: 5px;
   font-family: var(--font-body);
+  margin-right: 15px
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--font-body);
+}
+
+form button {
+  padding: 10px;
+  margin: 10px auto;
+  background-color: var(--btn-background);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+form button:hover {
+  background-color: darken(var(--btn-background), 10%);
 }
 
 h1 {
-  font-family: 'Bungee', serif;
+  font-family: var(--font-display);
   color: black;
 }
 
 h2 {
-  font-family: 'Bungee Hairline', cursive;
+  font-family: var(--font-body);
   color: black;
 }
 
 h3 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body);
   color: black;
 }
 
@@ -68,9 +103,6 @@ h3 {
 }
 
 .board-tile-card{
-  font-family: 'Open Sans', sans-serif;
-  color: black;
-  text-decoration: none;
   border: 2px solid var(--card-border);
   border-radius: 10px;
   padding: 10px;
@@ -81,19 +113,88 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+-moz-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+}
+
+.board-tile-card a {
+  font-family: var(--font-body);
+  color: black;
+  text-decoration: none;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.task-list ul{
+  font-family: var(--font-body);
+  color: black;
+  text-decoration: none;
+  border: 4px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--card-background);
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  -webkit-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+  -moz-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+  box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.45);
+}
+
+.task-list li {
+  list-style-type: none;
+}
+
+.task-title {
+  padding-bottom: 8px;
+  font-size: 20px;
+}
+
+.task-description {
+  padding-bottom: 20px;
+  font-size: 14px;
+}
+
+.card-btn {
+  padding: 10px;
+  margin: 10px auto;
+  background-color: var(--btn-background);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.card-btn a {
+  color: black;
+  text-decoration: none;
 }
 
 .create-btn {
   background-color: var(--btn-background);
-  font-family: 'Open Sans', sans-serif;
-  color: black;
   text-decoration: none;
   border: 2px solid var(--card-border);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  width: 300px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.create-btn a {
+  font-family: var(--font-body);
+  color: black;
+  text-decoration: none;
 }

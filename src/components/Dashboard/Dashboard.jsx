@@ -3,7 +3,6 @@
 
 import { Link } from 'react-router-dom'
 import { useLoggedUser } from '../../Contexts/UserContext';
-import styles from './Dashboard.module.css'
 
 
 const Dashboard = ({boards}) => {
@@ -19,12 +18,16 @@ const Dashboard = ({boards}) => {
         <Link to="/boards/new">Create new board</Link>
       </button>
       <ul className='board-list'>
-        {boards.map((board) => {
-        // console.log(board, '<-- individual board');
-          return (<li key={board._id} className='board-tile-card'>
-             <Link to={`/boards/${board._id}`}>{board.boardName}</Link>
-          </li>)
-})}
+      {boards.map((board) => (
+          <li key={board._id} className='board-tile-card'>
+            <div>
+              <h3>{board.boardName}</h3>
+              <button className='card-btn'>
+                <Link to={`/boards/${board._id}`}>View Board</Link>
+              </button>
+            </div>
+          </li>
+        ))}
       </ul>
     </main>
   );

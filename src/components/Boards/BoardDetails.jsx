@@ -4,7 +4,6 @@ import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from 'react';
 import * as boardService from '../../services/boardService'
 import { useLoggedUser } from "../../Contexts/UserContext";
-import styles from './BoardDetails.module.css'
 
 export default function BoardDetails({ handleDeleteBoard }) {
     const loggedUser = useLoggedUser();
@@ -17,13 +16,14 @@ export default function BoardDetails({ handleDeleteBoard }) {
             try {
                 const boardData = await boardService.show(boardId)
                 console.log(boardData, ' <-- board details from express')
-                setBoard(boardData.board)
+                console.log(loggedUser._id)
+                setBoard(boardData)
             } catch (error) {
                 console.log(error)
             }
         }
         fetchBoard();
-    }, [boardId])
+    }, [boardId, board])
 
     // console.log(board, ' <-- board state')
 
@@ -32,23 +32,24 @@ export default function BoardDetails({ handleDeleteBoard }) {
 
     return (
         <>
-            <div className={styles.boardDetails}>
-                <h2>{board.boardName}</h2>
+        <main>
+            <div>
+                <h1>{board.boardName}</h1>
                 <h3>Tasks:</h3>
-                <div>
+                <div className='task-list'>
                     {board.tasks.map((task) => {
                         return (
-                            <div key={task._id} className={styles.taskCard}>
-                                <div className={styles.taskTitle}>{task.taskName}</div>
-                                <p>{task.description}</p>
-                                <p>Complete within: {task.completeWithin}</p>
-                                <p className={styles.category}>{task.category}</p>
-                                <p>{task.status}</p>
-                                <button><Link to={`/boards/${board._id}/tasks/${task._id}/edit`}>View/edit task</Link></button>
+                            <ul key={task._id}>
+                                <li className="task-title">{task.taskName}</li>
+                                <li className="task-description">{task.description}</li>
+                                <li>Complete within: {task.completeWithin}</li>
+                                <li>Category: {task.category}</li>
+                                <li>Status: {task.status}</li>
+                                <button className="card-btn"><Link to={`/boards/${board._id}/tasks/${task._id}/edit`}>View/edit task</Link></button>
                                 {/* {loggedUser._id === board.owner && (
                                     <button onClick={() => handleDeleteTask(boardId)}>Delete Task</button>
                                 )} */}
-                            </div>
+                            </ul>
                         );
                     })}
                 </div>
@@ -62,6 +63,7 @@ export default function BoardDetails({ handleDeleteBoard }) {
                     <button onClick={() => handleDeleteBoard(boardId)}>Delete Board</button>
                 )}
             </div>
+            </main>
         </>
     )
 }

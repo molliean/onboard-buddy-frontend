@@ -53,9 +53,11 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
 
     return (
         <>
+            <main>
             <h1>{taskId ? 'Edit' : 'Create New'} Task</h1>
             <form onSubmit={handleSubmit}>
-                <div>
+                
+                <div className='form-group'>
                     <label htmlFor="taskName">Task:</label>
                     <input
                         required
@@ -66,7 +68,7 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
                         onChange={handleChange}
                     />
                 </div>
-                <div>
+                <div className='form-group'>
                     <label htmlFor="description">Description:</label>
                     <textarea
                         required
@@ -77,7 +79,7 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
                         onChange={handleChange}
                     />
                 </div>
-                <div>
+                <div className='form-group'>
                     <label htmlFor="completeWithin">Complete Within:</label>
                     <select
                         required
@@ -94,7 +96,7 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
                         <option value="90 days">90 days</option>
                     </select>
                 </div>
-                <div>
+                <div className='form-group'>
                     <label htmlFor="category">Category:</label>
                     <select
                         required
@@ -110,7 +112,7 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
                         <option value="Company Context">Company Context</option>
                     </select>
                 </div>
-                <div>
+                <div className='form-group'>
                     <label htmlFor="status">Status:</label>
                     <select
                         name="status"
@@ -123,9 +125,11 @@ export default function TaskForm({ handleAddTask, handleUpdateTask, handleDelete
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
+                
                 <button type="submit">{taskId ? 'Update' : 'Add'} Task</button>
                 <button onClick={() => handleDeleteTask(boardId, taskId)}>Delete Task</button>
             </form>
+            </main>
         </>
 
     )

@@ -22,6 +22,7 @@ export default function BoardForm({handleAddBoard}){
 
     return(
         <main>
+            <h1>Create Board</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="boardName">Board Name</label>
                 <input 

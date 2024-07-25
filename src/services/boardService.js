@@ -67,6 +67,7 @@ async function show(boardId) {
         const res = await fetch(`${BACKEND_URL}/${boardId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
+        // console.log(res.json())
         return res.json();
     } catch (error) {
         console.log(error);
