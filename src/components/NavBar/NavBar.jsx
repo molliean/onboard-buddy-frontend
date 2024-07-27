@@ -27,7 +27,7 @@ const NavBar = ({ handleSignout, boards }) => {
                 <ul className={styles.boardsList}>
                   {boards.map((board) => (
                     <li key={board._id}>
-                      <Link to={`/boards/${board._id}`}>{board.boardName}</Link>
+                      <Link to={`/boards/${board._id}`}>▶ {board.boardName}</Link>
                     </li>
                   ))}
                 </ul>

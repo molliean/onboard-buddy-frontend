@@ -110,7 +110,7 @@ const App = () => {
     try {
       const updatedTask = await boardService.updateTask(boardId, taskId, taskFormData);
       const updatedBoards = boards.map((board) => {
-        console.log(board)
+        console.log(board, '<-- handlechange data')
         if (board._id === boardId) {
           return {
             ...board,
